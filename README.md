@@ -1,6 +1,8 @@
 
 ```sh
+# サーバを立ち上げる
 docker compose up -d
 
-curl http://localhost:8000
+# 50並列で10秒間のスループットを計測する
+ab  -c 50 -t 10 http://127.0.0.1:8000/
 ```
