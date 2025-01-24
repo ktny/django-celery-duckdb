@@ -1,0 +1,13 @@
+services:
+  app:
+    build: ./src
+    working_dir: /opt
+    tty: true
+    entrypoint: ./entrypoint.sh
+    privileged: true
+    volumes:
+      - ./src:/opt
+    ports:
+      - 8000:8000
+    environment:
+      - PYTHONPATH=/opt
