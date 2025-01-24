@@ -12,6 +12,8 @@ services:
       - 8000:8000
     environment:
       - PYTHONPATH=/opt
+    env_file:
+      - .env
     depends_on:
       - broker
   celery:
@@ -27,6 +29,8 @@ services:
       - 5555:5555
     environment:
       - PYTHONPATH=/opt
+    env_file:
+      - .env
     depends_on:
       - broker
   broker:
