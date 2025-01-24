@@ -3,7 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from .tasks import add
 
 
-# Create your views here.
 def index(request: HttpRequest):
-    task_id = add.delay(4, 4)
-    return HttpResponse(task_id)
+    # celeryを使うことで非同期となっているが性能検証のため結果を待ってからレスポンスする
+    result = add.delay(4, 4)
+    return HttpResponse(result.get())
