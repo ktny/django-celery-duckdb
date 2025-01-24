@@ -1,9 +1,10 @@
 services:
   app:
+    container_name: app
     build: ./src
     working_dir: /opt
     tty: true
-    entrypoint: ./entrypoint.sh
+    entrypoint: ./entrypoint-app.sh
     privileged: true
     volumes:
       - ./src:/opt
@@ -11,3 +12,24 @@ services:
       - 8000:8000
     environment:
       - PYTHONPATH=/opt
+    depends_on:
+      - broker
+  celery:
+    container_name: celery
+    build: ./src
+    working_dir: /opt
+    tty: true
+    entrypoint: ./entrypoint-celery.sh
+    privileged: true
+    volumes:
+      - ./src:/opt
+    environment:
+      - PYTHONPATH=/opt
+    depends_on:
+      - broker
+  broker:
+    container_name: broker
+    image: rabbitmq:4-management
+    ports:
+      - 5672:5672
+      - 15672:15672

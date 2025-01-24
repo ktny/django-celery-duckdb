@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "celery>=5.4.0",
     "django>=5.1.5",
     "gunicorn[gthread]>=23.0.0",
 ]
