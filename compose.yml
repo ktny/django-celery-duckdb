@@ -23,6 +23,8 @@ services:
     privileged: true
     volumes:
       - ./src:/opt
+    ports:
+      - 5555:5555
     environment:
       - PYTHONPATH=/opt
     depends_on:

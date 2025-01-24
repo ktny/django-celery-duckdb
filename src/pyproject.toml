@@ -7,5 +7,6 @@ requires-python = ">=3.11"
 dependencies = [
     "celery>=5.4.0",
     "django>=5.1.5",
+    "flower>=2.0.1",
     "gunicorn[gthread]>=23.0.0",
 ]
