@@ -11,3 +11,9 @@ wheels/
 
 .ruff_cache/
 .env
+*.tbl
+*.duckdb
+*.duckdb.wal
+*.parquet
+tbl
+parquet
