@@ -38,4 +38,4 @@ where
 	and n_name = 'VIETNAM'
 order by
 	s_name;
-where rownum <= -1;
+

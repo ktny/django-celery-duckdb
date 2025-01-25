@@ -28,4 +28,4 @@ group by
 		)
 order by
 	value desc;
-where rownum <= -1;
+
