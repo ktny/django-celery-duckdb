@@ -23,6 +23,7 @@ services:
     privileged: true
     volumes:
       - ./src:/opt
+      - ./data:/data
     ports:
       - 5555:5555
     env_file:
