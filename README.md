@@ -14,21 +14,17 @@ TPC-Hでデータを生成した後、duckdbにparquetを参照するビュー�
 docker compose exec celery uv run /data/tpc-h/prepare.py
 ```
 
-# スループット計測
+# パフォーマンス計測
 
 ```sh
-# 5並列で10秒間のスループットを計測する
-ab -c 5 -t 10 http://localhost:8000/
+# 10並列で合計100回リクエストを計測する
+# -lでレスポンスのバイト数の違いをFailedとして処理しなくする
+ab -c 10 -n 100 -l http://localhost:8000/?q=1
 ```
 
-# レイテンシ計測
+# モニタリング
 
-```sh
-# 10並列で合計10回リクエストのレイテンシを計測する
-ab -n 10 -c 10 http://localhost:8000/
-```
-
-# flowerでcelery, rabbit-mqをモニタリングする
+flowerでcelery, rabbit-mqをモニタリングする
 
 ```sh
 uv run celery -A common flower -basic_auth=guest:guest --broker_api="http://guest:guest@broker:15672/api/vhost"
