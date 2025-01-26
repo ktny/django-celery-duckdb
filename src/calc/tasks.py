@@ -8,8 +8,8 @@ DUCKDB_FILE_PATH = "/data/tpc-h/tpc-h.duckdb"
 
 
 @shared_task
-def duck():
-    sql = read_sql_file(os.path.join(QUERY_DIR_PATH, "22.sql"))
+def duck(query_num: int):
+    sql = read_sql_file(os.path.join(QUERY_DIR_PATH, f"{query_num}.sql"))
     with duckdb.connect(DUCKDB_FILE_PATH, read_only=True) as con:
         result = con.sql(sql).fetchall()
         return result

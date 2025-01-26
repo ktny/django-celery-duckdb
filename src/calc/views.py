@@ -4,6 +4,8 @@ from .tasks import duck
 
 
 def index(request: HttpRequest):
+    query_num = request.GET.get("q", 1)
+    result = duck.delay(query_num)
+
     # celeryを使うことで非同期となっているが性能検証のため結果を待ってからレスポンスする
-    result = duck.delay()
     return HttpResponse(result.get())
