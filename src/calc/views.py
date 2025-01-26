@@ -1,11 +1,18 @@
-from django.http import HttpRequest, HttpResponse
+import time
+
+from django.http import HttpRequest, JsonResponse
 
 from .tasks import duck
 
 
 def index(request: HttpRequest):
-    query_num = request.GET.get("q", 1)
-    result = duck.delay(query_num)
+    start = time.perf_counter()
 
-    # celeryを使うことで非同期となっているが性能検証のため結果を待ってからレスポンスする
-    return HttpResponse(result.get())
+    query_num = request.GET.get("q", 1)
+    delayed = duck.delay(query_num)
+    result = delayed.get()  # 性能検証のため結果を待って取得する
+
+    end = time.perf_counter()
+    elapsed = end - start
+
+    return JsonResponse({"data": result, "elapsed": elapsed})

@@ -1,4 +1,3 @@
-import time
 from logging import getLogger
 
 logger = getLogger(__name__)
@@ -14,13 +13,8 @@ class LoggingMiddleware:
         # the view (and later middleware) are called.
 
         print(f"request: {request}")
-
-        start = time.perf_counter()
         response = self.get_response(request)
-        end = time.perf_counter()
-
         print(f"response: {response}")
-        print(f"elapsed: {end - start}")
 
         # Code to be executed for each request/response after
         # the view is called.
