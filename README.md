@@ -18,7 +18,14 @@ docker compose exec celery uv run /data/tpc-h/prepare.py
 
 ```sh
 # 5並列で10秒間のスループットを計測する
-ab  -c 5 -t 10 http://localhost:8000/
+ab -c 5 -t 10 http://localhost:8000/
+```
+
+# レイテンシ計測
+
+```sh
+# 10並列で合計10回リクエストのレイテンシを計測する
+ab -n 10 -c 10 http://localhost:8000/
 ```
 
 # flowerでcelery, rabbit-mqをモニタリングする
