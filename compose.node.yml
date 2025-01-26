@@ -1,0 +1,21 @@
+services:
+  celery-node:
+    container_name: celery-node
+    build: ./src
+    working_dir: /opt
+    tty: true
+    entrypoint: ./entrypoint-celery-node.sh
+    privileged: true
+    volumes:
+      - ./src:/opt
+      - ./data:/data
+    ports:
+      - 5556:5555
+    env_file:
+      - .env
+    networks:
+      - external
+
+networks:
+  external:
+    external: true

@@ -15,6 +15,8 @@ services:
     depends_on:
       broker:
         condition: service_healthy
+    networks:
+      - external
   celery:
     container_name: celery
     build: ./src
@@ -32,6 +34,8 @@ services:
     depends_on:
       broker:
         condition: service_healthy
+    networks:
+      - external
   broker:
     container_name: broker
     image: rabbitmq:4-management
@@ -43,3 +47,9 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
+    networks:
+      - external
+
+networks:
+  external:
+    external: true
